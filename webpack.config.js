@@ -33,6 +33,9 @@ switch(process.env.npm_lifecycle_event) {
   case 'build':
     config = merge(
       common,
+      {
+        devtool: 'source-map'
+      },
       parts.setupCSS(PATHS.app)
     )
     break;
@@ -40,6 +43,9 @@ switch(process.env.npm_lifecycle_event) {
     config = merge(
       common,
       parts.setupCSS(PATHS.app),
+      {
+        devtool: 'eval-source-map'
+      },
       parts.devServer({
         // customize host or port here if needed
         host: process.env.HOST,
