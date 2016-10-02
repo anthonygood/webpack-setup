@@ -10,7 +10,8 @@ const PATHS = {
 };
 
 const common = {
-// Entry accepts a path or an object of entries. // We'll be using the latter form given it's
+// Entry accepts a path or an object of entries.
+// We'll be using the latter form given it's
 // convenient with more complex configurations.
   entry: {
     app: PATHS.app
@@ -37,6 +38,10 @@ switch(process.env.npm_lifecycle_event) {
         devtool: 'source-map'
       },
       parts.setupCSS(PATHS.app),
+      parts.extractBundle({
+        name: 'vendor',
+        entries: ['react']
+      }),
       parts.minify()
     )
     break;
