@@ -36,7 +36,8 @@ switch(process.env.npm_lifecycle_event) {
       {
         devtool: 'source-map'
       },
-      parts.setupCSS(PATHS.app)
+      parts.setupCSS(PATHS.app),
+      parts.minify()
     )
     break;
   default:
