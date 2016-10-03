@@ -44,6 +44,7 @@ switch(process.env.npm_lifecycle_event) {
           chunkFilename: '[chunkhash].js'
         }
       },
+      parts.clean(PATHS.build),
       parts.setupCSS(PATHS.app),
       parts.extractBundle({
         name: 'vendor',
