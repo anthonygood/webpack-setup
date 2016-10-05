@@ -6,6 +6,7 @@ const parts             = require('./libs/parts');
 
 const PATHS = {
   app:   path.join(__dirname, 'app'),
+  style: path.join(__dirname, 'app', 'main.css'),
   build: path.join(__dirname, 'build')
 };
 
@@ -14,7 +15,8 @@ const common = {
 // We'll be using the latter form given it's
 // convenient with more complex configurations.
   entry: {
-    app: PATHS.app
+    style: PATHS.style,
+    app:   PATHS.app
   },
   output: {
     path: PATHS.build,
@@ -45,18 +47,18 @@ switch(process.env.npm_lifecycle_event) {
         }
       },
       parts.clean(PATHS.build),
-      parts.setupCSS(PATHS.app),
       parts.extractBundle({
         name: 'vendor',
         entries: ['react']
       }),
-      parts.minify()
+      parts.minify(),
+      parts.extractCSS(PATHS.style)
     )
     break;
   default:
     config = merge(
       common,
-      parts.setupCSS(PATHS.app),
+      parts.setupCSS(PATHS.style),
       {
         devtool: 'eval-source-map'
       },
