@@ -44,6 +44,8 @@ switch(process.env.npm_lifecycle_event) {
         devtool: 'source-map',
         output: {
           path: PATHS.build,
+          // Tweak this to match your GitHub project name publicPath: '/webpack-demo/'
+          publicPath: '/webpack-setup/',
           filename: '[name].[chunkhash].js',
           // This is used for require.ensure. The setup
           // will work without but this is useful to set.
