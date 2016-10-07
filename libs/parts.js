@@ -24,13 +24,15 @@ exports.devServer = function(options) {
       // If you use Vagrant or Cloud9, set
       // host: options.host || '0.0.0.0';
       //
-      // 0.0.0.0 is available to all network devices // unlike default `localhost`.
+      // 0.0.0.0 is available to all network devices
+      // unlike default `localhost`.
       host: options.host, // Defaults to `localhost`
       port: options.port // Defaults to 8080
 
     },
     plugins: [
-      // Enable multi-pass compilation for enhanced performance // in larger projects. Good default.
+      // Enable multi-pass compilation for enhanced performance
+      // in larger projects. Good default.
       new webpack.HotModuleReplacementPlugin({
         multiStep: true
       })
@@ -43,8 +45,8 @@ exports.setupCSS = function(paths) {
     module: {
       loaders: [
         {
-          test: /\.css$/,
-          loaders: ['style', 'css'],
+          test: /\.s?css$/,
+          loaders: ['style', 'css', 'sass'],
           include: paths
         }
       ]
@@ -101,6 +103,11 @@ exports.extractCSS = function(paths) {
           test:    /\.css$/,
           loader:  ExtractTextPlugin.extract('style', 'css'),
           include: paths
+        },
+        // Pre-process SASS
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css-loader!sass-loader'),
         }
       ]
     },
@@ -122,5 +129,5 @@ exports.purifyCSS = function(paths) {
         paths: paths
       }),
     ]
-  }
+  };
 }
